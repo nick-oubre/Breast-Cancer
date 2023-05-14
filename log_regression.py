@@ -3,16 +3,16 @@ import pandas as pd
 import matplotlib.pyplot as plt
 from sklearn.preprocessing import StandardScaler, LabelEncoder
 from sklearn.model_selection import train_test_split
-from sklearn import svm
+from sklearn import svm # not used in this version
 from sklearn.linear_model import LogisticRegression
-from sklearn.metrics import accuracy_score, confusion_matrix
-import seaborn as sns
+from sklearn.metrics import accuracy_score
+import seaborn as sns # used in debugging to visualize the data
 
-cancer_data = pd.read_csv('C:/Users/nickd/Downloads/archive/data.csv')
+cancer_data = pd.read_csv('C:/Users/nickd/Downloads/archive/data.csv') # data is availiable on Kaggle
 
 # print(cancer_data.head())
 
-cancer_data = cancer_data.dropna(axis=1)
+cancer_data = cancer_data.dropna(axis=1) # not many nan's in the data, the last column is all nan's, however
 # print(cancer_data['diagnosis'])
 labelencoder = LabelEncoder()
 cancer_data['diagnosis'] = labelencoder.fit_transform(cancer_data['diagnosis'])
@@ -25,7 +25,7 @@ Y = cancer_data.iloc[:, 1].values
 
 
 train_accs, test_accs = [], []
-for i in range(30000):
+for i in range(30000): # this number is arbitrary. I am testing for 30,000 different random states. Can be less if necessary
     # Split the data into training and testing sets
     X_train, X_test, Y_train, Y_test = train_test_split(X, Y, test_size=0.25, random_state=i)
 
